@@ -1,22 +1,16 @@
 import { useNavigate } from "react-router-dom";
 
-export default function TopBar({ title, showBack = true, rightIcon = null, transparent = false }) {
+export default function TopBar({ title, showBack = true, rightIcon = null }) {
   const navigate = useNavigate();
 
   return (
-    <div
-      className={`sticky top-0 z-40 flex items-center justify-between px-4 pt-[calc(0.875rem+env(safe-area-inset-top))] pb-3.5 transition-all duration-300 ${
-        transparent
-          ? "bg-transparent text-primary"
-          : "bg-white/80 backdrop-blur-md border-b border-primary/5 text-primary shadow-xs"
-      }`}
-    >
-      <div className="flex items-center gap-3">
+    <div className="desktop-topbar">
+      <div className="desktop-topbar-title">
         {showBack && (
           <button
             id="topbar-back-btn"
             onClick={() => navigate(-1)}
-            className="btn-press flex items-center justify-center w-9 h-9 rounded-full bg-primary/5 hover:bg-primary/10 transition-colors duration-200 cursor-pointer text-primary"
+            className="topbar-back-btn"
             aria-label="Go back"
           >
             <svg
@@ -33,7 +27,7 @@ export default function TopBar({ title, showBack = true, rightIcon = null, trans
             </svg>
           </button>
         )}
-        <h1 className="text-base font-bold tracking-tight text-primary-dark">{title}</h1>
+        <h2>{title}</h2>
       </div>
       {rightIcon && <div className="flex items-center">{rightIcon}</div>}
     </div>

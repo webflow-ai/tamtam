@@ -3,14 +3,20 @@ export default function StopTimeline({ stops, exchangeStops = [] }) {
     exchangeStops.some((ex) => ex.toLowerCase() === stop.toLowerCase());
 
   return (
-    <div className="flex flex-col relative pl-7 py-2">
-      {/* Vertical line */}
+    <div style={{ position: "relative", paddingLeft: 28, paddingTop: 6, paddingBottom: 6 }}>
+
+      {/* Vertical connecting line */}
       <div
-        className="absolute left-[12px] top-6 bottom-6 w-[2.5px] rounded-full"
+        aria-hidden="true"
         style={{
+          position: "absolute",
+          left: 11,
+          top: 18,
+          bottom: 18,
+          width: 2.5,
+          borderRadius: 4,
           background: "linear-gradient(180deg, #2D6A4F 0%, #95D5B2 100%)",
         }}
-        aria-hidden="true"
       />
 
       {stops.map((stop, idx) => {
@@ -19,68 +25,100 @@ export default function StopTimeline({ stops, exchangeStops = [] }) {
         const isLast = idx === stops.length - 1;
         const isEndpoint = isFirst || isLast;
 
+        // Dot sizing
+        const dotSize = isExchange ? 22 : isEndpoint ? 18 : 11;
+        const dotLeft = -(28 - (22 - dotSize) / 2 - 1);
+
         return (
           <div
             key={`${stop}-${idx}`}
-            className="relative flex items-center gap-3 py-2.5"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              paddingTop: 8,
+              paddingBottom: 8,
+              position: "relative",
+            }}
           >
             {/* Dot */}
             <div
-              className={`absolute -left-7 top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full transition-all duration-300
-                ${
-                  isExchange
-                    ? "w-6 h-6 bg-accent border-[2.5px] border-white shadow-[0_0_14px_rgba(245,158,11,0.4)]"
-                    : isEndpoint
-                    ? "w-5 h-5 border-[2.5px] border-white shadow-md"
-                    : "w-3 h-3 bg-white border-2 border-primary-soft/60"
-                }`}
-              style={
-                isEndpoint && !isExchange
-                  ? { background: "linear-gradient(135deg, #1B4332, #2D6A4F)" }
-                  : undefined
-              }
+              style={{
+                position: "absolute",
+                left: dotLeft,
+                top: "50%",
+                transform: "translateY(-50%)",
+                width: dotSize,
+                height: dotSize,
+                borderRadius: "50%",
+                border: "2.5px solid #ffffff",
+                boxShadow: isExchange
+                  ? "0 0 0 3px rgba(245,158,11,0.25), 0 2px 8px rgba(245,158,11,0.3)"
+                  : isEndpoint
+                  ? "0 2px 6px rgba(27,67,50,0.2)"
+                  : "none",
+                background: isExchange
+                  ? "#F59E0B"
+                  : isEndpoint
+                  ? "linear-gradient(135deg, #1B4332, #2D6A4F)"
+                  : "#ffffff",
+                outline: !isExchange && !isEndpoint ? "2px solid rgba(64,145,108,0.4)" : "none",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+                zIndex: 1,
+              }}
             >
               {isExchange && (
-                <svg
-                  width="10"
-                  height="10"
-                  viewBox="0 0 24 24"
-                  fill="white"
-                  stroke="white"
-                  strokeWidth="2"
-                >
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="white" stroke="white" strokeWidth="2">
                   <path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4" />
                 </svg>
               )}
             </div>
 
-            {/* Stop name and label */}
-            <div className="flex items-center gap-2 flex-1 min-w-0">
+            {/* Stop name + labels */}
+            <div style={{ display: "flex", alignItems: "center", gap: 8, flex: 1, minWidth: 0 }}>
               <span
-                className={`text-sm transition-all duration-200 truncate
-                  ${
-                    isExchange
-                      ? "font-bold text-accent"
-                      : isEndpoint
-                      ? "font-semibold text-primary"
-                      : "font-normal text-gray-500"
-                  }`}
+                style={{
+                  fontSize: "0.85rem",
+                  fontWeight: isExchange ? 700 : isEndpoint ? 600 : 400,
+                  color: isExchange ? "#d97706" : isEndpoint ? "#0F2920" : "#6b7280",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
               >
                 {stop}
               </span>
 
               {isExchange && (
-                <span className="shrink-0 text-[10px] bg-accent/15 text-accent font-bold px-2 py-0.5 rounded-full">
+                <span style={{
+                  fontSize: "0.65rem", fontWeight: 700,
+                  background: "rgba(245,158,11,0.12)", color: "#d97706",
+                  padding: "2px 8px", borderRadius: 100,
+                  flexShrink: 0,
+                }}>
                   Exchange
                 </span>
               )}
               {isFirst && !isExchange && (
-                <span className="shrink-0 text-[10px] bg-primary/10 text-primary font-bold px-2 py-0.5 rounded-full">
+                <span style={{
+                  fontSize: "0.65rem", fontWeight: 700,
+                  background: "rgba(27,67,50,0.08)", color: "#1B4332",
+                  padding: "2px 8px", borderRadius: 100,
+                  flexShrink: 0,
+                }}>
                   Start
                 </span>
               )}
               {isLast && !isExchange && (
-                <span className="shrink-0 text-[10px] bg-primary/10 text-primary font-bold px-2 py-0.5 rounded-full">
+                <span style={{
+                  fontSize: "0.65rem", fontWeight: 700,
+                  background: "rgba(27,67,50,0.08)", color: "#1B4332",
+                  padding: "2px 8px", borderRadius: 100,
+                  flexShrink: 0,
+                }}>
                   End
                 </span>
               )}

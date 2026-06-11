@@ -6,60 +6,85 @@ export default function RouteCard({ route, index = 0 }) {
 
   const firstStop = route.stops[0];
   const lastStop = route.stops[route.stops.length - 1];
+  const color = route.color || "#1B4332";
 
   return (
     <div
-      className="fade-in-up glass-card-solid overflow-hidden transition-all duration-300 hover:shadow-lg"
-      style={{ animationDelay: `${index * 0.08}s` }}
+      className="fade-in-up glass-card-solid"
+      style={{
+        animationDelay: `${index * 0.08}s`,
+        overflow: "hidden",
+        transition: "box-shadow 0.3s ease",
+      }}
     >
+      {/* Header Row */}
       <button
         id={`route-card-${route.id}`}
-        className="w-full text-left p-4 cursor-pointer"
         onClick={() => setExpanded(!expanded)}
         aria-expanded={expanded}
+        style={{
+          width: "100%",
+          textAlign: "left",
+          padding: "16px",
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          fontFamily: "var(--font-family-poppins)",
+          display: "block",
+        }}
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            {/* Route number badge */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          {/* Left: badge + name */}
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div
-              className="flex items-center justify-center w-12 h-12 rounded-2xl text-white font-bold text-sm shrink-0 shadow-md"
               style={{
-                background: `linear-gradient(135deg, ${route.color || "#1B4332"}, ${route.color ? route.color + "cc" : "#2D6A4F"})`,
+                width: 46,
+                height: 46,
+                borderRadius: 14,
+                background: `linear-gradient(135deg, ${color}, ${color}bb)`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "white",
+                fontWeight: 800,
+                fontSize: "0.82rem",
+                flexShrink: 0,
+                boxShadow: `0 4px 12px ${color}40`,
               }}
             >
               {route.id}
             </div>
-
             <div>
-              <p className="font-semibold text-primary text-[15px]">
+              <p style={{ fontWeight: 700, color: "#1B4332", fontSize: "0.95rem", marginBottom: 3 }}>
                 {route.name}
               </p>
-              <div className="flex items-center gap-1.5 mt-1">
-                <span className="text-xs text-gray-500 font-medium">{firstStop}</span>
-                <svg className="w-3 h-3 text-primary/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <span style={{ fontSize: "0.75rem", color: "#6b7280", fontWeight: 500 }}>{firstStop}</span>
+                <svg style={{ width: 12, height: 12, color: "rgba(27,67,50,0.3)", flexShrink: 0 }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
-                <span className="text-xs text-gray-500 font-medium">{lastStop}</span>
+                <span style={{ fontSize: "0.75rem", color: "#6b7280", fontWeight: 500 }}>{lastStop}</span>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          {/* Right: fare + chevron */}
+          <div style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
             <FareBadge amount={route.fare} />
             <div
-              className={`flex items-center justify-center w-7 h-7 rounded-full bg-gray-100 transition-transform duration-300 ${
-                expanded ? "rotate-180" : ""
-              }`}
+              style={{
+                width: 28,
+                height: 28,
+                borderRadius: "50%",
+                background: "#f3f4f6",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
+                transition: "transform 0.3s ease",
+              }}
             >
-              <svg
-                className="w-4 h-4 text-gray-400"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
+              <svg style={{ width: 15, height: 15, color: "#9ca3af" }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M6 9l6 6 6-6" />
               </svg>
             </div>
@@ -69,44 +94,74 @@ export default function RouteCard({ route, index = 0 }) {
 
       {/* Expandable stop list */}
       <div
-        className={`overflow-hidden transition-all duration-400 ease-in-out ${
-          expanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        }`}
+        style={{
+          maxHeight: expanded ? `${route.stops.length * 52 + 80}px` : "0px",
+          opacity: expanded ? 1 : 0,
+          overflow: "hidden",
+          transition: "max-height 0.35s ease, opacity 0.25s ease",
+        }}
       >
-        <div className="px-4 pb-4">
-          <div className="divider" />
-          <p className="section-label mb-3">
+        <div style={{ padding: "0 16px 16px" }}>
+          {/* Divider */}
+          <div style={{ height: 1, background: "rgba(27,67,50,0.06)", margin: "0 0 14px" }} />
+
+          <p className="section-label" style={{ marginBottom: 14 }}>
             {route.stops.length} Stops
           </p>
-          <div className="flex flex-col gap-0 relative pl-5">
-            {/* Line */}
+
+          {/* Timeline */}
+          <div style={{ position: "relative", paddingLeft: 28 }}>
+            {/* Vertical connecting line */}
             <div
-              className="absolute left-[7px] top-2 bottom-2 w-[2px] rounded-full"
               style={{
-                background: `linear-gradient(180deg, ${route.color || "#1B4332"}, ${route.color || "#1B4332"}33)`,
+                position: "absolute",
+                left: 7,
+                top: 10,
+                bottom: 10,
+                width: 2,
+                borderRadius: 4,
+                background: `linear-gradient(180deg, ${color} 0%, ${color}33 100%)`,
               }}
             />
 
             {route.stops.map((stop, idx) => {
               const isEndpoint = idx === 0 || idx === route.stops.length - 1;
+              const dotSize = isEndpoint ? 14 : 9;
+
               return (
-                <div key={stop} className="flex items-center gap-3 py-1.5 relative">
+                <div
+                  key={`${stop}-${idx}`}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 12,
+                    paddingTop: 6,
+                    paddingBottom: 6,
+                    position: "relative",
+                  }}
+                >
+                  {/* Dot */}
                   <div
-                    className={`absolute left-[-20px] top-1/2 -translate-y-1/2 rounded-full border-2 border-white ${
-                      isEndpoint ? "w-4 h-4 shadow-sm" : "w-2.5 h-2.5"
-                    }`}
                     style={{
-                      background: isEndpoint
-                        ? (route.color || "#1B4332")
-                        : (route.color || "#1B4332") + "40",
+                      position: "absolute",
+                      left: -(28 - (14 - dotSize) / 2),
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      width: dotSize,
+                      height: dotSize,
+                      borderRadius: "50%",
+                      border: "2px solid #ffffff",
+                      boxShadow: isEndpoint ? "0 2px 6px rgba(0,0,0,0.15)" : "none",
+                      background: isEndpoint ? color : `${color}45`,
+                      flexShrink: 0,
                     }}
                   />
                   <span
-                    className={`text-sm ${
-                      isEndpoint
-                        ? "font-semibold text-primary"
-                        : "text-gray-500"
-                    }`}
+                    style={{
+                      fontSize: "0.85rem",
+                      fontWeight: isEndpoint ? 700 : 400,
+                      color: isEndpoint ? "#0F2920" : "#6b7280",
+                    }}
                   >
                     {stop}
                   </span>

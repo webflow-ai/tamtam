@@ -6,7 +6,7 @@ const navItems = [
     label: "Home",
     icon: (active) => (
       <svg
-        className={`w-5 h-5 transition-transform duration-300 ${active ? "text-primary scale-110" : "text-gray-400"}`}
+        style={{ width: 22, height: 22, transition: "transform 0.2s ease" }}
         viewBox="0 0 24 24"
         fill={active ? "currentColor" : "none"}
         stroke="currentColor"
@@ -21,7 +21,7 @@ const navItems = [
     label: "Plan",
     icon: (active) => (
       <svg
-        className={`w-5 h-5 transition-transform duration-300 ${active ? "text-primary scale-110" : "text-gray-400"}`}
+        style={{ width: 22, height: 22 }}
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -39,20 +39,18 @@ const navItems = [
     label: "Routes",
     icon: (active) => (
       <svg
-        className={`w-5 h-5 transition-transform duration-300 ${active ? "text-primary scale-110" : "text-gray-400"}`}
+        style={{ width: 22, height: 22 }}
         viewBox="0 0 24 24"
-        fill={active ? "currentColor" : "none"}
+        fill="none"
         stroke="currentColor"
-        strokeWidth={active ? "0" : "1.8"}
+        strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <path d="M9 18l6-6-6-6" />
-        {active && <rect x="2" y="3" width="20" height="18" rx="3" fill="none" stroke="currentColor" strokeWidth="1.8" />}
-        {!active && <rect x="2" y="3" width="20" height="18" rx="3" />}
-        <line x1="7" y1="8" x2="17" y2="8" strokeWidth="1.8" stroke={active ? "#1B4332" : "currentColor"} />
-        <line x1="7" y1="12" x2="14" y2="12" strokeWidth="1.8" stroke={active ? "#1B4332" : "currentColor"} />
-        <line x1="7" y1="16" x2="11" y2="16" strokeWidth="1.8" stroke={active ? "#1B4332" : "currentColor"} />
+        <rect x="2" y="3" width="20" height="18" rx="3" />
+        <line x1="7" y1="8" x2="17" y2="8" />
+        <line x1="7" y1="12" x2="14" y2="12" />
+        <line x1="7" y1="16" x2="11" y2="16" />
       </svg>
     ),
   },
@@ -64,7 +62,13 @@ export default function BottomNav() {
 
   return (
     <div className="bottom-nav">
-      <div className="flex items-center justify-around py-2.5 px-6">
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around",
+        padding: "8px 16px 4px",
+        height: 56,
+      }}>
         {navItems.map((item) => {
           const isActive =
             location.pathname === item.path ||
@@ -76,20 +80,45 @@ export default function BottomNav() {
               key={item.path}
               id={`nav-${item.label.toLowerCase()}`}
               onClick={() => navigate(item.path)}
-              className="btn-press flex flex-col items-center gap-1.5 px-6 py-1.5 rounded-2xl relative cursor-pointer"
+              className="btn-press"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 4,
+                padding: "6px 20px",
+                borderRadius: "14px",
+                border: "none",
+                background: isActive ? "rgba(27,67,50,0.06)" : "transparent",
+                cursor: "pointer",
+                color: isActive ? "#1B4332" : "#9ca3af",
+                fontFamily: "var(--font-family-poppins)",
+                position: "relative",
+                transition: "all 0.2s ease",
+              }}
             >
-              {/* Highlight pill behind active icon */}
-              {isActive && (
-                <span className="absolute inset-0 bg-primary/6 rounded-xl scale-95 transition-all duration-300" />
-              )}
-              <div className="relative z-10">{item.icon(isActive)}</div>
-              <span
-                className={`text-[10px] font-bold tracking-wide transition-colors relative z-10 ${
-                  isActive ? "text-primary" : "text-gray-400"
-                }`}
-              >
+              {item.icon(isActive)}
+              <span style={{
+                fontSize: "0.62rem",
+                fontWeight: 700,
+                letterSpacing: "0.04em",
+                color: isActive ? "#1B4332" : "#9ca3af",
+                transition: "color 0.2s ease",
+              }}>
                 {item.label}
               </span>
+              {isActive && (
+                <span style={{
+                  position: "absolute",
+                  top: -1,
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  width: 20,
+                  height: 2.5,
+                  borderRadius: "0 0 4px 4px",
+                  background: "#1B4332",
+                }} />
+              )}
             </button>
           );
         })}
