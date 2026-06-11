@@ -90,7 +90,7 @@ export default function AutoRickshawIcon({ size = 120 }) {
       {/* Number plate */}
       <rect x="42" y="77" width="22" height="5" rx="2" fill="white" />
       <text x="53" y="81.5" textAnchor="middle" fontSize="4" fontWeight="bold" fill="#1B4332" fontFamily="sans-serif">
-        TamTam
+        Tempo
       </text>
 
       {/* Gradients */}

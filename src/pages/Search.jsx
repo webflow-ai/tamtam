@@ -4,7 +4,7 @@ import TopBar from "../components/TopBar";
 import RouteMap from "../components/RouteMap";
 import { getAllStops, tamtamRoutes } from "../data/routes";
 
-const allStops = getAllStops();
+const allStops = getAllStops().sort((a, b) => a.localeCompare(b));
 
 function getRecentSearches() {
   try { return JSON.parse(localStorage.getItem("tamtam_recent") || "[]"); }
@@ -26,8 +26,8 @@ function AutocompleteInput({ id, placeholder, value, onChange, accentColor = "#1
   const ref = useRef(null);
 
   const filtered = value.trim()
-    ? allStops.filter((s) => s.toLowerCase().includes(value.toLowerCase()) && s.toLowerCase() !== value.toLowerCase())
-    : [];
+    ? allStops.filter((s) => s.toLowerCase().includes(value.toLowerCase()))
+    : allStops;
 
   useEffect(() => {
     const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
@@ -51,8 +51,9 @@ function AutocompleteInput({ id, placeholder, value, onChange, accentColor = "#1
           onFocus={(e) => {
             e.target.style.borderColor = "rgba(27,67,50,0.3)";
             e.target.style.background = "#fff";
-            if (value.trim()) setOpen(true);
+            setOpen(true);
           }}
+          onClick={() => setOpen(true)}
           onBlur={(e) => {
             e.target.style.borderColor = "rgba(27,67,50,0.1)";
             e.target.style.background = "#f8fdf9";

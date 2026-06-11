@@ -21,7 +21,7 @@ export default function AllRoutes() {
               <div className="fade-in-up" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <div>
                   <p className="section-label">{tamtamRoutes.length} active routes</p>
-                  <p style={{ fontSize: "1.2rem", fontWeight: 800, color: "#0F2920", marginTop: 3, letterSpacing: "-0.02em" }}>Gwalior Tamtam Network</p>
+                  <p style={{ fontSize: "1.2rem", fontWeight: 800, color: "#0F2920", marginTop: 3, letterSpacing: "-0.02em" }}>Gwalior Tempo Network</p>
                 </div>
                 <div style={{ background: "rgba(27,67,50,0.05)", border: "1px solid rgba(27,67,50,0.06)", borderRadius: 9, padding: 3, display: "flex", gap: 3 }}>
                   {[["+ Map", true], ["List", false]].map(([label, val]) => (
@@ -47,7 +47,7 @@ export default function AllRoutes() {
                   </div>
                   <div>
                     <p style={{ fontSize: "0.82rem", fontWeight: 700, color: "#0F2920", marginBottom: 4 }}>Route Information & Frequency</p>
-                    <p style={{ fontSize: "0.72rem", color: "#6b7280", lineHeight: 1.65 }}>Fares are fixed approximate rates. Tamtams run from <span style={{ fontWeight: 700, color: "#2D6A4F" }}>6:00 AM to 9:00 PM</span>. Ask locals for nearest transit crossings.</p>
+                    <p style={{ fontSize: "0.72rem", color: "#6b7280", lineHeight: 1.65 }}>Fares are fixed approximate rates. Tempos run from <span style={{ fontWeight: 700, color: "#2D6A4F" }}>6:00 AM to 9:00 PM</span>. Ask locals for nearest transit crossings.</p>
                   </div>
                 </div>
               </div>
@@ -72,7 +72,7 @@ export default function AllRoutes() {
           <div style={{ position: "absolute", top: -30, right: -30, width: 140, height: 140, borderRadius: "50%", background: "rgba(255,255,255,0.03)" }} />
           <p style={{ fontSize: "0.65rem", color: "rgba(255,255,255,0.5)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 6 }}>Network</p>
           <h1 style={{ fontSize: "1.45rem", fontWeight: 800, color: "#fff", letterSpacing: "-0.03em", lineHeight: 1.2, marginBottom: 14 }}>
-            Gwalior Tamtam<br />Routes
+            Gwalior Tempo<br />Routes
           </h1>
           {/* Route legend pills */}
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
@@ -119,7 +119,7 @@ export default function AllRoutes() {
                 </div>
                 <p style={{ fontSize: "0.82rem", fontWeight: 700, color: "#0F2920" }}>Route & Fare Info</p>
               </div>
-              <p style={{ fontSize: "0.75rem", color: "#6b7280", lineHeight: 1.65 }}>Fares are fixed approximate rates. Tamtams run from <span style={{ fontWeight: 700, color: "#2D6A4F" }}>6 AM to 9 PM</span> daily. Ask locals for nearest transit crossings.</p>
+              <p style={{ fontSize: "0.75rem", color: "#6b7280", lineHeight: 1.65 }}>Fares are fixed approximate rates. Tempos run from <span style={{ fontWeight: 700, color: "#2D6A4F" }}>6 AM to 9 PM</span> daily. Ask locals for nearest transit crossings.</p>
             </div>
           </div>
 

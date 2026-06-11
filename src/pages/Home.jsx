@@ -32,7 +32,7 @@ export default function Home() {
         <div className="desktop-topbar">
           <div className="desktop-topbar-title"><h2>Dashboard</h2></div>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <span style={{ fontSize: "0.8rem", fontWeight: 600, color: "#6b7280" }}>Gwalior Tamtam Network</span>
+            <span style={{ fontSize: "0.8rem", fontWeight: 600, color: "#6b7280" }}>Gwalior Tempo Network</span>
             <div style={{ display: "flex", alignItems: "center", gap: "6px", background: "rgba(27,67,50,0.05)", padding: "5px 11px", borderRadius: "100px", border: "1px solid rgba(27,67,50,0.08)" }}>
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#22c55e", display: "inline-block" }} />
               <span style={{ fontSize: "0.68rem", fontWeight: 700, color: "#15803d", textTransform: "uppercase", letterSpacing: "0.06em" }}>Live</span>
@@ -136,14 +136,10 @@ export default function Home() {
           {/* Top bar row */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 22 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <div style={{ width: 36, height: 36, borderRadius: 10, background: "rgba(255,255,255,0.12)", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid rgba(255,255,255,0.15)" }}>
-                <svg style={{ width: 18, height: 18, color: "white" }} viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
-                </svg>
-              </div>
+              <img width="36" height="36" src="https://img.icons8.com/color/96/auto-rickshaw.png" alt="auto-rickshaw" />
               <div>
-                <p style={{ fontSize: "1.1rem", fontWeight: 800, color: "#ffffff", letterSpacing: "-0.02em", lineHeight: 1 }}>TamTam</p>
-                <p style={{ fontSize: "0.65rem", color: "rgba(255,255,255,0.55)", marginTop: 1, fontWeight: 500 }}>Gwalior Transit</p>
+                <p style={{ fontSize: "1.1rem", fontWeight: 800, color: "#ffffff", letterSpacing: "-0.02em", lineHeight: 1 }}>Tempo</p>
+                <p style={{ fontSize: "0.65rem", color: "rgba(255,255,255,0.7)", marginTop: 1, fontWeight: 600 }}>your sahi rasta</p>
               </div>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 5, background: "rgba(82,212,138,0.15)", padding: "5px 10px", borderRadius: 100, border: "1px solid rgba(82,212,138,0.25)" }}>

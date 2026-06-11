@@ -17,21 +17,21 @@ export const stopCoordinates = {
 export const tamtamRoutes = [
   {
     id: "01",
-    name: "Tamtam 01",
+    name: "Tempo 01",
     color: "#2D6A4F",
     stops: ["City Centre", "Phoolbagh", "Hazira", "Maharaja Bada"],
     fare: 10,
   },
   {
     id: "02",
-    name: "Tamtam 02",
+    name: "Tempo 02",
     color: "#1B4332",
     stops: ["Maharaja Bada", "Lashkar", "Gole Ka Mandir", "Thatipur"],
     fare: 15,
   },
   {
     id: "03",
-    name: "Tamtam 03",
+    name: "Tempo 03",
     color: "#40916C",
     stops: ["Thatipur", "MLB College", "Kampu", "Gwalior Fort"],
     fare: 10,
